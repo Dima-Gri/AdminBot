@@ -6,8 +6,16 @@ services:
     build: ./bot
     volumes:
       - ./bot/logs/:/bot/bot/logs
-    environment:
-      - TOKEN
+    restart: always
+    
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
 
-  mysqldb:
-    image: mysql
+networks:
+  default:
+    name: bridge-nerwork
+    external: true
+    
